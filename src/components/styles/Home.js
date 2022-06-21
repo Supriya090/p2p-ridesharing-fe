@@ -92,13 +92,22 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         marginTop: "10px"
     },
+
     textField: {
         marginBottom: "15px"
     },
 
     rideButton: {
         marginBottom: "0px"
-    }
+    },
+
+    quoteText: {
+        fontFamily: "Nunito, sans- serif",
+        fontWeight: 700,
+        fontSize: "1.2rem",
+        marginTop: "30px",
+        fontStyle: "italic"
+    },
 }))
 
 export default useStyles;

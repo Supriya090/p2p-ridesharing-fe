@@ -2,6 +2,7 @@ import React from 'react'
 import useStyles from './styles/Home'
 import taxiImage from "../assets/taxi.png"
 import taxiIllustration from "../assets/CarIllustration.png"
+import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png"
 import { Button, TextField, Typography } from '@material-ui/core';
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
             <Typography className={classes.titleText}>RideSaathi</Typography>
             <img src={taxiImage} className={classes.taxiImageStyle} alt="TaxiImage" />
             <div className={classes.rideGraphicsDiv}>
-                <img src={taxiIllustration} className={classes.taxiIllustrationStyle} alt="TaxiIllustration" />
+                <img src={taxiIllustrationRight} className={classes.taxiIllustrationStyle} alt="TaxiIllustration" />
                 <div className={classes.rideInfoDiv}>
                     <form className={classes.userForm}>
                         <div className={classes.textFields}>
@@ -43,8 +44,8 @@ const Home = () => {
                             className={`${classes.connectButton} ${classes.rideButton}`} />
                     </form>
                 </div>
+                <Typography className={classes.quoteText}>Easing Lives One Ride at a Time</Typography>
             </div>
-            {/* <Typography>Easing Lives One Ride at a Time</Typography> */}
         </div>
     )
 }
