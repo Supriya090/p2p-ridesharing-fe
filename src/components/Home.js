@@ -1,11 +1,22 @@
-import React from 'react'
 import useStyles from './styles/Home'
 import taxiImage from "../assets/taxi.png"
 import taxiIllustration from "../assets/CarIllustration.png"
 import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png"
 import { Button, TextField, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from "react"
+import { rideShare } from "../api/rideshare"
 
 const Home = (props) => {
+
+    const [balance, setBalance] = useState(null)
+
+  
+
+    const getBalance=async()=>{
+       
+        
+    }
+
     const classes = useStyles();
     return (
         <div className={classes.mainContent}>
@@ -20,7 +31,7 @@ const Home = (props) => {
                 {props.account==null?<>Wallet not Connected</>:<>{props.account}</>}
             </Typography>
             <Typography className={classes.addressText}>
-                Balance:{props.account}
+                Balance:{getBalance}
             </Typography>
             <Typography className={classes.titleText}>RideSaathi</Typography>
             <img src={taxiImage} className={classes.taxiImageStyle} alt="TaxiImage" />
@@ -45,6 +56,7 @@ const Home = (props) => {
                             />
                         </div>
                         <input
+                            onClick={props.findRide}
                             type='button'
                             value="Find a Ride"
                             className={`${classes.connectButton} ${classes.rideButton}`} />
