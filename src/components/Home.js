@@ -5,16 +5,22 @@ import taxiIllustration from "../assets/CarIllustration.png"
 import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png"
 import { Button, TextField, Typography } from '@material-ui/core';
 
-const Home = () => {
+const Home = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.mainContent}>
-            <Button variant='contained' className={classes.connectButton}>Connect Wallet</Button>
+            <Button 
+            variant='contained' 
+            onClick={props.connectWallet}
+            className={classes.connectButton}>
+                                {props.account==null?<>Connect Wallet</>:<>Wallet Connected</>}
+            </Button>
             <Typography className={classes.addressText}>
                 Address:
+                {props.account==null?<>Wallet not Connected</>:<>{props.account}</>}
             </Typography>
             <Typography className={classes.addressText}>
-                Balance:
+                Balance:{props.account}
             </Typography>
             <Typography className={classes.titleText}>RideSaathi</Typography>
             <img src={taxiImage} className={classes.taxiImageStyle} alt="TaxiImage" />
