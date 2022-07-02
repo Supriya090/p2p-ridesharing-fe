@@ -7,8 +7,8 @@ import { Button, TextField, Typography } from '@material-ui/core';
 
 const Home = () => {
     const classes = useStyles();
-    return (
-        <div className={classes.mainContent}>
+    return (  
+        <div>
             <Button variant='contained' className={classes.connectButton}>Connect Wallet</Button>
             <Typography className={classes.addressText}>
                 Address:
