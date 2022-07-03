@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
         height: "80vh",
         backgroundColor: "#fff",
         margin: "auto",
-        margiinTop: "20px",
+        marginTop: "20px",
         borderRadius: "15px",
         position: "relative",
         padding: "30px 40px",
@@ -16,10 +16,12 @@ const useStyles = makeStyles((theme) => ({
         height: "30px",
         width: "30px"
     },
+
     addressText: {
         fontFamily: "Inter, sans-serif",
         fontSize: "1.1rem"
     },
+
     titleText: {
         fontFamily: "Nunito, sans- serif",
         fontWeight: 800,
@@ -68,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
         height: "250px",
         width: "230px"
     },
+
     userForm: {
         '& label.Mui-focused': {
             color: '#000',
@@ -84,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
             }
         },
     },
+
     textFields: {
         display: "flex",
         flexDirection: "column",
@@ -91,12 +95,14 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: "25px",
         marginBottom: "5px"
     },
+
     label: {
         margin: '10px 0px 3px 0px',
         fontFamily: "Nunito, sans- serif",
         fontWeight: 800,
         fontSize: "16px",
     },
+
     textField: {
         fontFamily: "Nunito, sans- serif",
         marginBottom: "5px",
@@ -120,4 +126,4 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-export default useStyles;
+export { useStyles };

@@ -1,21 +1,33 @@
 import React from "react";
-import useStyles from "./styles/Home";
+import { useStyles } from "./styles/Home";
 import taxiImage from "../assets/taxi.png";
-import taxiIllustration from "../assets/CarIllustration.png";
 import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png";
 import { Button, TextField, Typography } from "@material-ui/core";
 import useStore from "../hooks/useStore";
+import { useState } from "react";
 
-const Home = () => {
+const Home = (props) => {
   const classes = useStyles();
   const { state } = useStore();
+  const [balance, setBalance] = useState(null);
+  const getBalance = async () => {};
+
   return (
     <div>
       <Button variant='contained' className={classes.connectButton}>
-        Connect Wallet
+        {props.account == null ? <>Connect Wallet</> : <>Wallet Connected</>}
       </Button>
-      <Typography className={classes.addressText}>Address:</Typography>
-      <Typography className={classes.addressText}>Balance:</Typography>
+      <Typography className={classes.addressText}>
+        Address:{" "}
+        {props.account == null ? (
+          <>Wallet not Connected</>
+        ) : (
+          <>{props.account}</>
+        )}
+      </Typography>
+      <Typography className={classes.addressText}>
+        Balance: {getBalance}
+      </Typography>
       <Typography className={classes.titleText}>RideSaathi</Typography>
       <img src={taxiImage} className={classes.taxiImageStyle} alt='TaxiImage' />
       <div className={classes.rideGraphicsDiv}>

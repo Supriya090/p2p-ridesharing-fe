@@ -1,12 +1,12 @@
 import React from "react";
 import Home from "./Home";
 import Location from "./Location";
-import useStyles from "./styles/Home";
+import { useStyles } from "./styles/Home";
 import home from "../assets/home.png";
 import location from "../assets/location.png";
 import { Tabs, Tab } from "@material-ui/core";
 
-const Main = () => {
+const Main = (props) => {
   const classes = useStyles();
   const [tabState, setTabState] = React.useState("Home");
 
@@ -33,7 +33,16 @@ const Main = () => {
           label='Location'
         />
       </Tabs>
-      {tabState === "Home" ? <Home /> : <Location />}
+      {tabState === "Home" ? (
+        <Home
+          connectWallet={props.connectWallet}
+          account={props.account}
+          balance={props.balance}
+          findRide={props.findRide}
+        />
+      ) : (
+        <Location />
+      )}
     </div>
   );
 };
