@@ -10,9 +10,12 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "15px",
         position: "relative",
         padding: "30px 40px",
-
     },
 
+    tabIcons: {
+        height: "30px",
+        width: "30px"
+    },
     addressText: {
         fontFamily: "Inter, sans-serif",
         fontSize: "1.1rem"
@@ -49,20 +52,21 @@ const useStyles = makeStyles((theme) => ({
 
     rideInfoDiv: {
         backgroundColor: "#E5E5E5",
-        width: "45%",
+        width: "55%",
         display: "flex",
         // justifyContent: "center",
         alignItems: "center",
         padding: "15px 0px",
         borderRadius: "10px",
+        position: "relative"
     },
 
     taxiIllustrationStyle: {
         position: "absolute",
-        bottom: 15,
-        right: 100,
-        height: "300px",
-        width: "260px"
+        bottom: 45,
+        right: 50,
+        height: "250px",
+        width: "230px"
     },
     userForm: {
         '& label.Mui-focused': {
@@ -83,11 +87,12 @@ const useStyles = makeStyles((theme) => ({
     textFields: {
         display: "flex",
         flexDirection: "column",
-        width: "100%",
-        marginLeft: "40px",
+        width: "110%",
+        marginLeft: "25px",
+        marginBottom: "5px"
     },
     label: {
-        margin: '10px 0px 3px 0px',        
+        margin: '10px 0px 3px 0px',
         fontFamily: "Nunito, sans- serif",
         fontWeight: 800,
         fontSize: "16px",
@@ -99,14 +104,19 @@ const useStyles = makeStyles((theme) => ({
 
     rideButton: {
         margin: "20px 0px 10px 40px",
+        position: "absolute",
+        top: -75,
+        right: 0
     },
 
     quoteText: {
         fontFamily: "Nunito, sans- serif",
         fontWeight: 700,
-        fontSize: "1.2rem",
-        marginTop: "20px",
-        fontStyle: "italic"
+        fontSize: "1.1rem",
+        fontStyle: "italic",
+        position: "absolute",
+        right: 35,
+        bottom: 15
     },
 }))
 
