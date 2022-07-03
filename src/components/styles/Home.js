@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Nunito, sans- serif",
         fontWeight: 800,
         fontSize: "2.5rem",
-        marginTop: "10px"
+        margin: "10px 0px 5px 0px",
     },
 
     taxiImageStyle: {
@@ -51,11 +51,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#E5E5E5",
         width: "45%",
         display: "flex",
-        justifyContent: "center",
+        // justifyContent: "center",
         alignItems: "center",
-        padding: "30px 0px",
+        padding: "15px 0px",
         borderRadius: "10px",
-        marginTop: "20px"
     },
 
     taxiIllustrationStyle: {
@@ -78,34 +77,35 @@ const useStyles = makeStyles((theme) => ({
             },
             '&:hover fieldset': {
                 borderColor: '#000',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#000',
-                color: "#000",
-
-            },
+            }
         },
     },
     textFields: {
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        marginTop: "10px"
+        marginLeft: "40px",
     },
-
+    label: {
+        margin: '10px 0px 3px 0px',        
+        fontFamily: "Nunito, sans- serif",
+        fontWeight: 800,
+        fontSize: "16px",
+    },
     textField: {
-        marginBottom: "15px"
+        fontFamily: "Nunito, sans- serif",
+        marginBottom: "5px",
     },
 
     rideButton: {
-        marginBottom: "0px"
+        margin: "20px 0px 10px 40px",
     },
 
     quoteText: {
         fontFamily: "Nunito, sans- serif",
         fontWeight: 700,
         fontSize: "1.2rem",
-        marginTop: "30px",
+        marginTop: "20px",
         fontStyle: "italic"
     },
 }))

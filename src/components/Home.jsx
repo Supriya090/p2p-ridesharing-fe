@@ -4,9 +4,11 @@ import taxiImage from "../assets/taxi.png"
 import taxiIllustration from "../assets/CarIllustration.png"
 import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png"
 import { Button, TextField, Typography } from '@material-ui/core';
+import useStore from '../hooks/useStore'
 
 const Home = () => {
     const classes = useStyles();
+    const { state } = useStore();
     return (  
         <div>
             <Button variant='contained' className={classes.connectButton}>Connect Wallet</Button>
@@ -23,18 +25,26 @@ const Home = () => {
                 <div className={classes.rideInfoDiv}>
                     <form className={classes.userForm}>
                         <div className={classes.textFields}>
+                            <label className={classes.label}>Pickup Location</label>
                             <TextField
                                 id='pickupLocation'
-                                label="Enter Pickup Location"
                                 variant='outlined'
                                 name='pickupLocation'
+                                value={state?.pickUp ? `Latitude : ${state?.pickUp.lat} Longitude : ${state?.pickUp.lng}`:'Please Select from Location tab'}
+                                disabled={true}
+                                multiline={true}
+                                size='small'
                                 className={classes.textField}
                             />
+                            <label className={classes.label}>Drop Location</label>
                             <TextField
                                 id='dropoffLocation'
-                                label="Enter Drop Off Location"
                                 variant='outlined'
                                 name='dropoffLocation'
+                                value={state?.dropOff ? `Latitude : ${state?.dropOff.lat} Longitude : ${state?.dropOff.lng}`:'Please Select from Location tab'}
+                                disabled={true}
+                                multiline={true}
+                                size='small'
                                 className={classes.textField}
                             />
                         </div>
