@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import '../App.css';
 import Home from '../components/Home';
+import Driver from '../components/Driver';
+import Rider from '../components/Rider';
 import React, { useEffect, useState } from "react"
 import { rideShare,contractMethod } from "../api/rideshare"
 import { ethers } from 'ethers';
@@ -54,6 +56,18 @@ function App() {
       <Routes>
         <Route exact path="/" element={
         <Home 
+        connectWallet = {connectWallet}
+        account = {account}
+        balance = {balance}
+        findRide = {findRide}/>}></Route>
+        <Route exact path="/driver" element={
+        <Driver 
+        connectWallet = {connectWallet}
+        account = {account}
+        balance = {balance}
+        findRide = {findRide}/>}></Route>
+        <Route exact path="/rider" element={
+        <Rider 
         connectWallet = {connectWallet}
         account = {account}
         balance = {balance}
