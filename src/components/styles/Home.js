@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "15px",
         position: "relative",
         padding: "30px 40px",
-
     },
 
     addressText: {
@@ -22,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 800,
         fontSize: "2.5rem",
         margin: "10px 0px 5px 0px",
+    },
+    side_by_side : {
+        display: "flex",
+        flex_direction: "row"
     },
 
     taxiImageStyle: {
@@ -63,6 +66,13 @@ const useStyles = makeStyles((theme) => ({
         right: 100,
         height: "300px",
         width: "260px"
+    },
+    mint: {
+        position: "absolute",
+        bottom: 100,
+        right: 0,
+        height: "100px",
+        width: "100px"
     },
     userForm: {
         '& label.Mui-focused': {
