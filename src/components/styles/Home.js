@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "2.5rem",
         marginTop: "10px"
     },
+    side_by_side : {
+        display: "flex",
+        flex_direction: "row"
+    },
 
     taxiImageStyle: {
         width: "400px",
@@ -64,6 +68,13 @@ const useStyles = makeStyles((theme) => ({
         right: 100,
         height: "300px",
         width: "260px"
+    },
+    mint: {
+        position: "absolute",
+        bottom: 100,
+        right: 0,
+        height: "100px",
+        width: "100px"
     },
     userForm: {
         '& label.Mui-focused': {

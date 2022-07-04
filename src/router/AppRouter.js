@@ -6,12 +6,14 @@ import Rider from '../components/Rider';
 import React, { useEffect, useState } from "react"
 import { rideShare,contractMethod } from "../api/rideshare"
 import { ethers } from 'ethers';
+import Register from '../components/register';
 
 
 function App() {
   const [account, setAccount] = useState(null)
   const [isOwner, setIsOwner] = useState(null)
   const [balance, setBalance] = useState(null)
+  const [status, setStatus] = useState(null)
 
 
 
@@ -20,24 +22,61 @@ function App() {
         const addr = window.ethereum.selectedAddress
         setAccount(addr)
 
-      //   if (account!= null) {
-      //     let balance = await rideShare.balanceOf("0x48d1027660e33dad39476ca0781078a868e62e83")
-      //     setBalance(balance)
-      //     console.log(balance)
-      // }
 
-      await contractMethod.mint(account,0.001);
+
+      // await contractMethod.mint(account,0.001);
         // const owner = await rideshare.owner()
         // if (owner.toUpperCase() === addr.toUpperCase()) {
         //     setIsOwner(true)
         // }
     }
 
-    const findRide = async () => {
+  const mint = async (val) => {
 
-    await contractMethod.mint(account,{value: ethers.utils.parseEther("0.001")});
+    await contractMethod.mint(account,{value: ethers.utils.parseEther(val)});
+
   
   }
+
+  const findRide = async (source,dest,amount) => {
+
+    await contractMethod.requestRide(source,dest,amount);
+
+  
+  }
+
+  const registerAsDriver = async (vehicle,license, phone) => {
+
+    await contractMethod.addDriver(vehicle,license, phone);
+  
+  }
+
+  const registerAsRider = async (phone) => {
+
+    await contractMethod.joinAsRider(phone);
+  
+  }
+
+  const ApproveDriver = async (vehicle, license) => {
+
+    await contractMethod.registerDriver(vehicle, license);
+  
+  }
+
+  const selectRider = async (rideId, arrivalTime) => {
+
+    await contractMethod.selectRider(rideId, 5);
+  
+  }
+
+  const getUser = async () => {
+
+      let user = await rideShare.getStatus(account);
+      setStatus(user);
+
+      return user;
+  }
+
 
     useEffect(() => {
       async function fetchData() {
@@ -56,10 +95,16 @@ function App() {
       <Routes>
         <Route exact path="/" element={
         <Home 
+        registerAsDriver = {registerAsDriver}
+        registerAsRider = {registerAsRider}
+        ApproveDriver = {ApproveDriver}
         connectWallet = {connectWallet}
+        mint = {mint}
         account = {account}
         balance = {balance}
-        findRide = {findRide}/>}></Route>
+        status = {status}
+        findRide = {findRide}
+        getUser = {getUser}/>}></Route>
         <Route exact path="/driver" element={
         <Driver 
         connectWallet = {connectWallet}
@@ -72,6 +117,11 @@ function App() {
         account = {account}
         balance = {balance}
         findRide = {findRide}/>}></Route>
+        <Route exact path="/register" element={
+        <Register 
+        registerAsDriver = {registerAsDriver}
+        registerAsRider = {registerAsRider}
+        />}></Route>
       </Routes>
     </div>
   );
