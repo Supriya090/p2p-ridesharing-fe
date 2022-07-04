@@ -9,24 +9,18 @@ import { useState } from "react";
 const Home = (props) => {
   const classes = useStyles();
   const { state } = useStore();
-  const [balance, setBalance] = useState(null);
-  const getBalance = async () => {};
 
   return (
     <div>
-      <Button variant='contained' className={classes.connectButton}>
-        {props.account == null ? <>Connect Wallet</> : <>Wallet Connected</>}
+      <Button variant='contained' onClick={props.connectWallet} className={classes.connectButton}>
+        {state?.account == null ? <>Connect Wallet</> : <>Wallet Connected</>}
       </Button>
       <Typography className={classes.addressText}>
         Address:{" "}
-        {props.account == null ? (
-          <>Wallet not Connected</>
-        ) : (
-          <>{props.account}</>
-        )}
+        {state?.account ?? "Wallet Not Connected"}
       </Typography>
       <Typography className={classes.addressText}>
-        Balance: {getBalance}
+        Balance: {state?.RIDEbalance ?? "Wallet Not Connected"}
       </Typography>
       <Typography className={classes.titleText}>RideSaathi</Typography>
       <img src={taxiImage} className={classes.taxiImageStyle} alt='TaxiImage' />

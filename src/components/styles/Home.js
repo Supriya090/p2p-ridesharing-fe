@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
         top: 0,
         right: 0
     },
-
     connectButton: {
         backgroundColor: "#000",
         color: "#fff",

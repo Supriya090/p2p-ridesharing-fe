@@ -2,13 +2,14 @@ import { Route, Routes } from 'react-router-dom';
 import '../App.css';
 import Main from '../components/Main';
 import { StoreContext } from './../hooks/useStore';
-import React, { useEffect, useState, useReducer } from "react"
-import { rideShare, contractMethod } from "../api/rideshare"
-import { ethers } from 'ethers';
+import React, { useEffect, useReducer } from "react"
+import { getBalance } from './../api/ride';
 
 const initialState = {
   pickUp: null,
   dropOff: null,
+  account: null,
+  RIDEbalance: null,
 };
 
 function App() {
@@ -25,44 +26,41 @@ function App() {
           ...state,
           dropOff: payload
         }
+      case 'SET_ACCOUNT':
+        return {
+          ...state,
+          account: payload
+        }
+      case 'SET_RIDE_BALANCE':
+        return {
+          ...state,
+          RIDEbalance: payload
+        }
       default:
         return state;
     }
   }, initialState);
 
-  const [account, setAccount] = useState(null)
-  const [isOwner, setIsOwner] = useState(null)
-  const [balance, setBalance] = useState(null)
-
   const connectWallet = async () => {
     await window.ethereum.request({ method: 'eth_requestAccounts' })
     const addr = window.ethereum.selectedAddress
-    setAccount(addr)
+    dispatch({ type: 'SET_ACCOUNT', payload: addr })
 
-    //   if (account!= null) {
-    //     let balance = await rideShare.balanceOf("0x48d1027660e33dad39476ca0781078a868e62e83")
-    //     setBalance(balance)
-    //     console.log(balance)
-    // }
+    if (addr) {
+      const balance = await getBalance(addr)
+      console.log("bal",balance);
+      dispatch({ type: 'SET_RIDE_BALANCE', payload: balance })
+    }
 
-    await contractMethod.mint(account, 0.001);
-    // const owner = await rideshare.owner()
-    // if (owner.toUpperCase() === addr.toUpperCase()) {
-    //     setIsOwner(true)
-    // }
-  }
-
-  const findRide = async () => {
-    await contractMethod.mint(account, { value: ethers.utils.parseEther("0.001") });
   }
 
   useEffect(() => {
     async function fetchData() {
       if (window.ethereum === undefined) {
-        console.log("no wallet detected")
+        alert("no wallet detected")
       }
       window.ethereum.on("accountsChanged", function account() {
-        setAccount(window.ethereum.selectedAddress)
+        dispatch({ type: 'SET_ACCOUNT', payload: window.ethereum.selectedAddress })
       })
     }
     fetchData();
@@ -73,10 +71,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<Main
-            connectWallet={connectWallet}
-            account={account}
-            balance={balance}
-            findRide={findRide} />}></Route>
+            connectWallet={connectWallet} />}
+          ></Route>
         </Routes>
       </div>
     </StoreContext.Provider>
