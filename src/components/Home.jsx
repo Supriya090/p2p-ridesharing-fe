@@ -16,17 +16,24 @@ import Owner from './owner';
 const Home = (props) => {
 
     let [balance,setBalance] = useState(null)
-    let [user, setUser] = useState(1)
+    let [user, setUser] = useState(null)
     let [eth, setEther] = useState(0)
     let [pop, setPop] = useState(false)
 
-    const getUser = async () => {
+    useEffect(() => {
+        async function fetchData() {
+            await window.ethereum.request({ method: 'eth_requestAccounts' })
+            const addr = window.ethereum.selectedAddress
 
-        let user = await rideShare.getStatus(props.account);
-        setUser(user);
+            const stat = await rideShare.getStatus(addr)
+            setUser(stat)
 
-    }
+            const balance = await rideShare.balanceOf(addr)
+            setBalance(balance)
 
+        }
+        fetchData();
+    }, [])
     const handleLogin =() =>{
         // getUser()
         if(user == 3){
@@ -110,7 +117,7 @@ const Home = (props) => {
                 <img src={taxiIllustrationRight} className={classes.taxiIllustrationStyle} alt="TaxiIllustration" />
                 <Navbar connectWallet = {props.connectWallet}
                     account = {props.account}
-                    balance = {props.balance}/>
+                    balance = {balance}/>
                 <Typography className={classes.quoteText}>Easing Lives One Ride at a Time</Typography>
             </div>
             <button

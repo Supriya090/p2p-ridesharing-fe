@@ -13,7 +13,7 @@ function App() {
   const [account, setAccount] = useState(null)
   const [isOwner, setIsOwner] = useState(null)
   const [balance, setBalance] = useState(null)
-  const [status, setStatus] = useState(null)
+  const [status, setStatus] = useState(0)
 
 
 
@@ -22,6 +22,8 @@ function App() {
         const addr = window.ethereum.selectedAddress
         setAccount(addr)
 
+        let user = await rideShare.getStatus(account);
+        setStatus(user);
 
 
       // await contractMethod.mint(account,0.001);
@@ -69,14 +71,6 @@ function App() {
   
   }
 
-  const getUser = async () => {
-
-      let user = await rideShare.getStatus(account);
-      setStatus(user);
-
-      return user;
-  }
-
 
     useEffect(() => {
       async function fetchData() {
@@ -103,8 +97,7 @@ function App() {
         account = {account}
         balance = {balance}
         status = {status}
-        findRide = {findRide}
-        getUser = {getUser}/>}></Route>
+        findRide = {findRide}/>}></Route>
         <Route exact path="/driver" element={
         <Driver 
         connectWallet = {connectWallet}

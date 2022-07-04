@@ -55,8 +55,8 @@ const Register = (props) => {
                             value="Register as Driver"
                             className={`${classes.connectButton} ${classes.rideButton}`} />
                     </form>
-
-                    <div>
+                    </div>
+                    <div className={classes.rideInfoDiv}>
                     <form className={classes.userForm}>
                         <div className={classes.textFields}>
                             <TextField
@@ -77,12 +77,7 @@ const Register = (props) => {
                             className={`${classes.connectButton} ${classes.rideButton}`} />
                     </form>
                     </div>
-                    
-                   
-                </div>
-           
-            </>
-        
+            </>  
     )
 }
 
