@@ -28,7 +28,7 @@ const Navbar = (props) => {
             </Typography>
             <Typography className={classes.addressText}>
                 Balance:  
-                {props.account==null?<>Wallet not Connected</>:<>{}</>}
+                {props.account==null?<>Wallet not Connected</>:<>{props.balance}</>}
 
             </Typography>
             </div>

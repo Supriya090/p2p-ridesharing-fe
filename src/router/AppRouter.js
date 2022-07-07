@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
+import { useReducer } from 'react';
 import '../App.css';
+import { StoreContext } from './../hooks/useStore';
 import Home from '../components/Home';
 import Driver from '../components/Driver';
 import Rider from '../components/Rider';
@@ -7,16 +9,34 @@ import React, { useEffect, useState } from "react"
 import { rideShare,contractMethod } from "../api/rideshare"
 import { ethers } from 'ethers';
 import Register from '../components/register';
-
+const initialState = {
+  pickUp: null,
+  dropOff: null,
+};
 
 function App() {
   const [account, setAccount] = useState(null)
   const [isOwner, setIsOwner] = useState(null)
   const [balance, setBalance] = useState(null)
   const [status, setStatus] = useState(0)
-
-
-
+  const [state, dispatch] = useReducer((state, action) => {
+    const { type, payload } = action;
+    switch (type) {
+      case 'SET_PICKUP_LOCATION':
+        return {
+          ...state,
+          pickUp: payload
+        }
+      case 'SET_DROP_LOCATION':
+        return {
+          ...state,
+          dropOff: payload
+        }
+        default:
+          return state;
+      }
+    }, initialState);
+    
     const connectWallet = async () => {
         await window.ethereum.request({ method: 'eth_requestAccounts' })
         const addr = window.ethereum.selectedAddress
@@ -85,6 +105,7 @@ function App() {
   }, [])
 
   return (
+    <StoreContext.Provider value={{ state, dispatch }}>
     <div className="App">
       <Routes>
         <Route exact path="/" element={
@@ -117,6 +138,7 @@ function App() {
         />}></Route>
       </Routes>
     </div>
+    </StoreContext.Provider>
   );
 }
 

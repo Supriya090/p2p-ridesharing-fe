@@ -5,13 +5,14 @@ import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png"
 import { Button, TextField, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from "react"
 import { rideShare } from "../api/rideshare"
+import useStore from "../hooks/useStore"
 
 const Rider = (props) => {
     const [lat,setLat] = useState(null)
     const [source,setSource] = useState([])
     const [dest,setDest] = useState([])
     const [amount, setAmount] = useState(null)
-
+    const { state } = useStore()
 
     const classes = useStyles();
     return (
@@ -27,6 +28,7 @@ const Rider = (props) => {
                                 label="Lat"
                                 variant='outlined'
                                 name='latitude'
+                                value={state?.pickUp ? `${state?.pickUp.lat}` : ''}
                                 className={classes.textField}
                                 onChange={(e) => setLat(e.target.value)}
                             />
@@ -35,6 +37,7 @@ const Rider = (props) => {
                                 label="Long"
                                 variant='outlined'
                                 name='longitude'
+                                value={state?.pickUp ? `${state?.pickUp.lng}` : ''}
                                 className={classes.textField}
                                 onChange={(e) => setSource([lat,e.target.value])}
                             />
@@ -46,6 +49,7 @@ const Rider = (props) => {
                                 label="Lat"
                                 variant='outlined'
                                 name='latitude'
+                                value={state?.dropOff ? `${state?.dropOff.lat}` : ''}
                                 className={classes.textField}
                                 onChange={(e) => setLat(e.target.value)}
                             />
@@ -54,6 +58,7 @@ const Rider = (props) => {
                                 label="Long"
                                 variant='outlined'
                                 name='longitude'
+                                value={state?.dropOff ? `${state?.dropOff.lat}` : ''}
                                 className={classes.textField}
                                 onChange={(e) => setDest([lat,e.target.value])}
                             />

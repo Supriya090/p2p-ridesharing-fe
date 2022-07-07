@@ -11,6 +11,10 @@ import Rider from './Rider';
 import Register from './register';
 import Driver from './Driver';
 import Owner from './owner';
+import Location from './Location';
+import home from "../assets/home.png"
+import location from "../assets/location.png"
+import { Tabs, Tab } from "@material-ui/core"
 
 
 const Home = (props) => {
@@ -19,6 +23,11 @@ const Home = (props) => {
     let [user, setUser] = useState(null)
     let [eth, setEther] = useState(0)
     let [pop, setPop] = useState(false)
+    const [tabState, setTabState] = React.useState('Home');
+
+    const handleTabClick = (_, val) => {
+        setTabState(val);
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -28,12 +37,13 @@ const Home = (props) => {
             const stat = await rideShare.getStatus(addr)
             setUser(stat)
 
-            const balance = await rideShare.balanceOf(addr)
+            var balance = await rideShare.balanceOf(addr)
+            balance = parseFloat(balance)
+            console.log(balance);
             setBalance(balance)
-
         }
         fetchData();
-    }, [])
+    }, [props.account])
     const handleLogin =() =>{
         // getUser()
         if(user == 3){
@@ -111,6 +121,12 @@ const Home = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.mainContent}>
+              <Tabs value={tabState} onChange={handleTabClick} style={{ paddingBottom: '30px'}}>
+                <Tab icon={<img src={home} alt='Home' />} value={'Home'} label='Home' />
+                <Tab icon={<img src={location} alt='Location' />} value={'Location'} label='Location' />
+              </Tabs>
+            {tabState === 'Location' ? <Location /> : (
+              <>
             <Typography className={classes.titleText}>RideSaathi</Typography>
             <img src={taxiImage} className={classes.taxiImageStyle} alt="TaxiImage" />
             <div className={classes.rideGraphicsDiv}>
@@ -128,13 +144,10 @@ const Home = (props) => {
             className={classes.mint}>
                 SWAP TO RID
             </button>
-            
-            
             {props.account==null?<></>:<>{handleLogin()}</>}
             {pop==true?<>{handleMint()}</>:<></>}
-
-           
-           
+            </>
+            )}
         </div>
     )
 }
