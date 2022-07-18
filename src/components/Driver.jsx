@@ -13,23 +13,28 @@ import IconButton from '@mui/material/IconButton';
 
 const Driver = (props) => {
 
-    let riders = new Array()
+    let [riders,setRiders] = useState([])
+    const emptyAddr = "0x0000000000000000000000000000000000000000"
 
     useEffect(() => {
         async function fetchData() {
             await window.ethereum.request({ method: 'eth_requestAccounts' })
             const addr = window.ethereum.selectedAddress
 
-            const riderList = await rideShare.getRideDetails()
-            console.log(riderList)
-
-            if (riderList.length!=0) {
-                for (let i = 0; i < riderList.length; i++) {
-                    if (parseInt(riderList[i].driverAddr) != 0) {
-                    riders.push(riderList[i])
-                    }                
+            const riderList = await rideShare.getWaitingRiders()
+            let temp = new Array()
+            let count = 0
+            for (let i = 0; i < riderList.length; i++) {
+                if (riderList[i].fare !=0) {
+                    temp[count] = riderList[i]
+                    count++
                 }
+                
             }
+            console.log(temp)
+
+     
+            setRiders(temp)
 
         }
         fetchData();
@@ -41,28 +46,30 @@ const Driver = (props) => {
            
                 <div className={classes.rideInfoDiv}>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {riders.length!=0?<>{[1,2,3].map((rides) => (
-                    <ListItem
-                    // key={value}
-                    disableGutters
-                    secondaryAction={
-                        
-                        <Button 
-                        variant='contained' 
-                        onClick={(event) => {
-                            event.preventDefault();
+                    {console.log(riders.length)}
+                    {(riders.length!=0 )?<>{riders.map((rides) => (
+                        <ListItem
+                        // key={value}
+                        disableGutters
+                        secondaryAction={
                             
-                            props.selectRider(riders.rideId);
-                          }}
-                        className={classes.connectButton}>
-                                            {riders.length!=0?<>Select</>:<></>}
-                        </Button>
-                    }
-                    >
-                    <ListItemText primary={"Ride Number : "+ rides.rideId} secondary={"Rider Address :"+ rides.riderAddr+"\n Pick up Point :"
-                +rides.pickup+"\n Drop off Point :"+rides.dropoff+"\n Fare Amount :"+rides.fare} />
- 
-                    </ListItem>
+                            <Button 
+                            variant='contained' 
+                            onClick={(event) => {
+                                event.preventDefault();
+                                
+                                props.selectRider(rides.id);
+                              }}
+                            className={classes.connectButton}>
+                                                {riders.length!=0?<>Select</>:<></>}
+                            </Button>
+                        }
+                        >
+                        <ListItemText primary={"Ride Number : "+ rides.id} secondary={"Rider Address :"+ rides.ridedetails.riderAddr+"\n Pick up Point :"
+                    +rides.pickup+"\n Drop off Point :"+rides.dropoff+"\n Fare Amount :"+rides.fare+"\n Phone Number :"+rides.ridedetails.phoneNumber} />
+                    </ListItem> 
+                    
+                    
                 ))}</>:<>No Riders Available at the moment</>}
                 
                 </List>

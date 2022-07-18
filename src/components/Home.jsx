@@ -49,13 +49,17 @@ const Home = (props) => {
         if(user == 2){
             return(
                 <Rider 
-                findRide = {props.findRide}/>  
+                findRide = {props.findRide}
+                payDriver = {props.payDriver}
+                cancelRide = {props.cancelRide}/>  
             )
         }
 
         if(user == 1){
             return(
-               <Driver /> 
+               <Driver 
+               selectRider = {props.selectRider}
+               /> 
             )
         }
 

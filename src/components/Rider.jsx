@@ -11,7 +11,29 @@ const Rider = (props) => {
     const [source,setSource] = useState([])
     const [dest,setDest] = useState([])
     const [amount, setAmount] = useState(null)
+    const [ride, setRide] = useState({})  
 
+    useEffect(() => {
+        async function fetchData() {
+            await window.ethereum.request({ method: 'eth_requestAccounts' })
+            const addr = window.ethereum.selectedAddress
+
+            const rides = await rideShare.getRideDetails()
+            console.log(rides)
+            for (let i = 0; i < rides.length; i++) {
+                console.log(rides[i].riderAddr.toUpperCase())
+                console.log(addr.toUpperCase())
+                if (rides[i].riderAddr.toUpperCase() == addr.toUpperCase() && !rides[i].paid) {
+                    setRide(rides[i])
+                    break
+                }
+             
+                
+            }
+            console.log(ride)
+        }
+        fetchData();
+    }, [])
 
     const classes = useStyles();
     return (
@@ -78,6 +100,34 @@ const Rider = (props) => {
                             className={`${classes.connectButton} ${classes.rideButton}`} />
                     </form>
                 </div>
+
+                {ride.fare==0?<></>:
+                
+              
+                <div className={classes.rideInfoDiv}>
+
+                    <form className={classes.userForm}>
+                   
+
+                        <input
+                            onClick={(event) => {
+                                event.preventDefault();
+                                props.payDriver(ride.rideId);
+                              }}
+                            type='button'
+                            value="Pay to Driver"
+                            className={`${classes.connectButton} ${classes.rideButton}`} />
+                        <input
+                            onClick={(event) => {
+                                event.preventDefault();
+                                props.cancelRide(ride.rideId);
+                              }}
+                            type='button'
+                            value="Cancel Ride"
+                            className={`${classes.connectButton} ${classes.rideButton}`} />        
+                    </form>
+                </div>
+}
    
             </>
         

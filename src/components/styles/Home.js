@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     side_by_side : {
         display: "flex",
         flex_direction: "row"
+        
     },
 
     taxiImageStyle: {

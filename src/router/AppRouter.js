@@ -43,8 +43,18 @@ function App() {
   const findRide = async (source,dest,amount) => {
 
     await contractMethod.requestRide(source,dest,amount);
-
   
+  }
+
+  const payDriver = async (rideId) => {
+
+    await contractMethod.payDriver(rideId);
+  }
+
+  const cancelRide = async (rideId) => {
+
+    await contractMethod.cancelRide(rideId);
+
   }
 
   const registerAsDriver = async (vehicle,license, phone) => {
@@ -92,6 +102,9 @@ function App() {
         registerAsDriver = {registerAsDriver}
         registerAsRider = {registerAsRider}
         ApproveDriver = {ApproveDriver}
+        selectRider = {selectRider}
+        payDriver = {payDriver}
+        cancelRide = {cancelRide}
         connectWallet = {connectWallet}
         mint = {mint}
         account = {account}
