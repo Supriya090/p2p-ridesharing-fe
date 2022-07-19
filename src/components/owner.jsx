@@ -1,10 +1,6 @@
 import useStyles from './styles/Home'
-import taxiImage from "../assets/taxi.png"
-import taxiIllustration from "../assets/CarIllustration.png"
-import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png"
-import { Button, TextField, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from "react"
-import { rideShare } from "../api/rideshare"
+import { TextField } from '@material-ui/core';
+import React, {  useState } from "react"
 
 const Owner = (props) => {
 

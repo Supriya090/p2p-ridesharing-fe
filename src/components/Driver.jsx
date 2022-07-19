@@ -1,20 +1,15 @@
 import useStyles from './styles/Home'
-import taxiImage from "../assets/taxi.png"
-import taxiIllustration from "../assets/CarIllustration.png"
-import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png"
-import { Button, TextField, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from "react"
-import { rideShare,contractMethod } from "../api/rideshare"
+import { rideShare } from "../api/rideshare"
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
 
 const Driver = (props) => {
 
     let [riders,setRiders] = useState([])
-    const emptyAddr = "0x0000000000000000000000000000000000000000"
 
     useEffect(() => {
         async function fetchData() {

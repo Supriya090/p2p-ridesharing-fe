@@ -1,11 +1,9 @@
 import useStyles from './styles/Home'
 import taxiImage from "../assets/taxi.png"
-import taxiIllustration from "../assets/CarIllustration.png"
 import taxiIllustrationRight from "../assets/TaxiIllustrationRight.png"
-import mint from "../assets/mint.jpg"
-import { Button, TextField, Typography } from '@material-ui/core';
+import {  TextField, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from "react"
-import { rideShare,contractMethod } from "../api/rideshare"
+import { rideShare } from "../api/rideshare"
 import Navbar from './navbar';
 import Rider from './Rider';
 import Register from './register';
@@ -77,7 +75,7 @@ const Home = (props) => {
             <div className={classes.rideInfoDiv}>
                 <form className={classes.userForm}>
                 <div className={classes.textFields}>
-                <Typography>1 ETH = 223100 RID</Typography>
+                <Typography>1 ETH = 100000 RID</Typography>
                             <TextField
                                 id='value to SWAP'
                                 label="Enter value to swap"
